@@ -1,104 +1,92 @@
 class Notebook {
-    constructor() {
-        this.brand = "";
-        this.price = "";
-        this.model = "";
-        this.setting = false;
+    constructor(brand, years, price, model) {
+        this.brand = brand;
+        this.years = years;
+        this.price = price;
+        this.model = model;
     }
 }
 
 class NotebookBuilder {
-    constructor() {
-        this.notebook = new Notebook();
+    constructor(brand) {
+        this.brand = brand;
     }
-
-    getBrand(value) {
-        this.notebook.brand = value;
+    setYears(years) {
+        this.years = years;
+        return this
+    }
+    setPrice(price) {
+        this.price = price;
         return this;
     }
-
-    getModel(value) {
-        this.notebook.model = value;
+    setModels(model) {
+        this.model = model;
         return this;
     }
-
-    getPrice(value) {
-        this.notebook.price = value;
-        return this;
-    }
-
-    getSetting(value) {
-        this.notebook.setting = value;
-        return this;
-    }
-
     build() {
-        return this.notebook;
+        return new Notebook(this.brand, this.years, this.price, this.model)
     }
 }
 
-const myNotebook = new NotebookBuilder()
-    .getBrand("MacBook")
-    .getModel("Pro 16 2019")
-    .getPrice("2500$")
-    .getSetting(true)
-    .build();
+const myNotebook1 = new NotebookBuilder('MacBook')
+    .setYears(2020)
+    .setPrice(2800)
+    .setModels('Pro')
+    .build()
 
-console.log(myNotebook);
+console.log(myNotebook1)
+
+const myNotebook2 = new NotebookBuilder('MacBook')
+    .setYears(2019)
+    .setPrice(1800)
+    .setModels('Air')
+    .build()
+
+console.log(myNotebook2)
+
+// const myNotebook3 = new NotebookBuilder('Xiomi', 'Pro')
+//     .setYears(2019)
+//     .setPrice(1500)
+//     .build()
+
+// console.log(myNotebook3)
 
 // class Wallet {
-//     constructor() {
-//         this.balance = 0;
-//         this.check = false;
-//         this.completion = false;
+
+//     constructor(balance, deposit, withdraw) {
+//         this.balance = balance;
+//         this.deposit = deposit;
+//         this.withdraw = withdraw;
 //     }
 // }
 
 // class WalletBuilder {
-//     constructor() {
-//         this.wallet = new Wallet();
-//     }
-
-//     getBalance(value) {
-//         this.wallet.balance = value;
-//         return this;
-//     }
-
-//     getCheck(check) {
-//         this.wallet.check = check;
-//         return this;
-//     }
-
-//     getCompletion(completion) {
-//         this.wallet.completion = completion;
-//         return this;
+//     constructor(balance) {
+//         this.balance = balance;
 //     }
 
 //     addDeposit(value) {
-//         this.wallet.balance += value;
+//         this.balance += value;
 //         return this;
 //     }
 
-//     withdraw(value) {
-//         if (value > this.wallet.balance) {
+//     setWithdraw(value) {
+//         if (value > this.balance) {
 //             console.log("No enough money");
 //             return this;
 //         }
-//         this.wallet.balance -= value;
+//         this.balance -= value;
 //         return this;
 //     }
 
 //     build() {
-//         return this.wallet;
+//         return new WalletBuilder(this.balance, this.deposit, this.withdraw, this.check);
 //     }
 // }
 
-// const myBalance = new WalletBuilder()
-//     .getBalance(1500)
-//     .addDeposit(0)
-//     .withdraw(2000)
-//     .getCheck(true)
-//     .getCompletion(true)
+// const myBalance = new WalletBuilder(0)
+//     .addDeposit(1000)
+//     .setWithdraw(1500)
 //     .build();
 
 // console.log(myBalance);
