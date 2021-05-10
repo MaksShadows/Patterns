@@ -1,43 +1,55 @@
-function Junior(cost) {
-  this.type = 'Junior';
-  this.cost = cost
+// Abstract
+
+class AbstractCarFactory {
+  createDevs() {
+    return new Devs();
+  }
+
+  createTester() {
+    return new TestDevs();
+  }
 }
-
-function Midle(cost) {
-  this.type = 'Midle';
-  this.cost = cost
+class Devs {
+  constructor(name) {
+    this.type = "Web-devoper";
+    this.name = name;
+  }
 }
-
-function Senior(cost) {
-  this.type = 'Senior';
-  this.cost = cost
-}
-
-
-function MemberFactory() {
-  this.createMember = function (type, cost) {
-    let member;
-    if (type === 'junior') member = new Junior(type, cost)
-    else if (type === 'midle') member = new Midle(type, cost)
-    else if (type === 'senior') member = new Senior(type, cost)
-    member.type = type;
-    member.define = function () {
-      console.log(`${this.type} : ${cost}`)
-    }
-    return member;
+class TestDevs {
+  constructor(name) {
+    this.type = "Test Engineer";
+    this.name = name;
   }
 }
 
-// creating objects
+// Concrete #1
 
-const members = [];
-const factory = new MemberFactory();
+class DeveloperFactory extends AbstractCarFactory {
+  createDevs(name) {
+    return new Developers(name);
+  }
+  createTester(name) {
+    return new TestDeveloper(name);
+  }
+}
 
-members.push(factory.createMember("junior", '1000$'));
-members.push(factory.createMember("midle", '2500$'));
-members.push(factory.createMember("senior", '3500$'));
+class Developers extends Devs {
+  constructor(name) {
+    super(name);
+  }
+}
 
+class TestDeveloper extends TestDevs {
+  constructor(name) {
+    super(name);
+  }
+}
 
-members.forEach(member => {
-  member.define(); // method from our Factpry func
-});
+const createFActory = (Factory, delovopersName, testerName) => {
+  const concreteFactory = new Factory();
+  const concreteDevoler = concreteFactory.createDevs(delovopersName);
+  const concreteTester = concreteFactory.createTester(testerName);
+
+  console.log(concreteFactory, concreteDevoler, concreteTester);
+};
+createFActory(DeveloperFactory, "FrontEnd", "QA Engineer");
