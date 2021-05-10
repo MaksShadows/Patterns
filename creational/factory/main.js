@@ -16,7 +16,7 @@ function MemberFactory() {
     this.createMember = function (name, type) {
         let member;
         if (type === 'developer') member = new Developer(name)
-        else if (type === 'tester') member = new Midle(name)
+        else if (type === 'tester') member = new Tester(name)
         member.type = type;
         member.define = function () {
             console.log(`${this.name} - ${this.type} `)
