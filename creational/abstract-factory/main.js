@@ -1,6 +1,6 @@
 // Abstract
 
-class AbstractCarFactory {
+class AbstractFactory {
   createDevs() {
     return new Devs();
   }
