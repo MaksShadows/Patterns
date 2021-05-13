@@ -17,12 +17,12 @@ function MemberFactory() {
         let member;
         if (type === 'developer') member = new Developer(name)
         else if (type === 'tester') member = new Tester(name)
-        member.type = type;
-        member.define = function () {
-            console.log(`${this.name} - ${this.type} `)
-        }
         return member;
     }
+}
+
+function say() {
+    console.log(`${this.name} - ${this.type} `)
 }
 
 // creating objects
@@ -36,6 +36,7 @@ members.push(factory.createMember("Marc Weldman", 'tester'))
 members.push(factory.createMember("Sammy Ranier", 'tester'))
 
 
-members.forEach(member => {
-    member.define(); // method from our Factpry func
+
+members.forEach(function (x) {
+    return say.call(x);
 });
