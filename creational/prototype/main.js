@@ -1,26 +1,34 @@
-const vehicle = {
-
-    move() {
-        console.log(`${this.name} is moving and lifting anchor up`);
-    },
-    stop() {
-        console.log(`${this.name} stopped and lifting anchor down`);
+class Book {
+    constructor(genre, author, name, years) {
+        this.genre = genre;
+        this.author = author;
+        this.name = name;
+        this.years = years;
     }
-};
 
-const ship1 = Object.create(vehicle, {
-    name: {
-        value: "Argo"
+    say = () => {
+        console.log("Ваш выбор: " + this.genre + " " + this.author +
+            " " + this.name + " " + this.years);
     }
-});
+}
 
-const ship2 = Object.create(vehicle, {
-    name: {
-        value: "Avrora"
+class BookPrototype {
+    constructor(proto) {
+        this.proto = proto
     }
-});
 
-console.log(ship1.__proto__ === vehicle)
+    clone = () => {
+        const book = new Book();
+        book.genre = proto.genre;
+        book.author = proto.author;
+        book.name = proto.name;
+        book.years = proto.years;
+        return book;
 
-ship1.move()
-ship2.stop()
+    }
+}
+
+const proto = new Book("Детектив", "Стивен Кинг", "Мистер Мерседес", "2020");
+const prototype = new BookPrototype(proto);
+const book = prototype.clone();
+book.say();
