@@ -6,7 +6,7 @@ class Book {
         this.years = years;
     }
 
-    say = () => {
+    clone = () => {
         console.log("Ваш выбор: " + this.genre + " " + this.author +
             " " + this.name + " " + this.years);
     }
@@ -31,4 +31,4 @@ class BookPrototype {
 const proto = new Book("Детектив", "Стивен Кинг", "Мистер Мерседес", "2020");
 const prototype = new BookPrototype(proto);
 const book = prototype.clone();
-book.say();
+book.clone();
