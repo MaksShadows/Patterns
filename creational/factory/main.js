@@ -35,8 +35,6 @@ members.push(factory.createMember("Tom Bond", 'developer'))
 members.push(factory.createMember("Marc Weldman", 'tester'))
 members.push(factory.createMember("Sammy Ranier", 'tester'))
 
-
-
 members.forEach(function (x) {
     return say.call(x);
 });
