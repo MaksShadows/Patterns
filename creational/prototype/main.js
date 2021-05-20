@@ -1,5 +1,12 @@
 class Book {
+    constructor() {}
+}
+
+
+class BookPrototype extends Book {
+
     constructor(genre, author, name, years) {
+        super();
         this.genre = genre;
         this.author = author;
         this.name = name;
@@ -7,18 +14,7 @@ class Book {
     }
 
     clone = () => {
-        console.log("Ваш выбор: " + this.genre + " " + this.author +
-            " " + this.name + " " + this.years);
-    }
-}
-
-class BookPrototype {
-    constructor(proto) {
-        this.proto = proto
-    }
-
-    clone = () => {
-        const book = new Book();
+        const book = new BookPrototype();
         book.genre = proto.genre;
         book.author = proto.author;
         book.name = proto.name;
@@ -28,7 +24,36 @@ class BookPrototype {
     }
 }
 
-const proto = new Book("Детектив", "Стивен Кинг", "Мистер Мерседес", "2020");
-const prototype = new BookPrototype(proto);
-const book = prototype.clone();
-book.clone();
+
+const proto = new BookPrototype("Детектив", "Стивен Кинг", "Мистер Мерседес", "2020");
+const book = proto.clone();
+console.log(book);
+
+
+
+// class Book {
+//     constructor() {}
+// }
+
+
+// class BookPrototype extends Book {
+
+//     constructor() {
+//         super();
+//         this.genre = "Детектив";
+//         this.author = "Стивен Кинг";
+//         this.name = "Мистер Мерседес"
+//         this.years = "2020";
+//     }
+
+//     clone = () => {
+//         const book = new BookPrototype();
+//         return book;
+
+//     }
+// }
+
+
+// const proto = new BookPrototype();
+// const book = proto.clone();
+// console.log(book);
