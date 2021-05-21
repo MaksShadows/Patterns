@@ -1,4 +1,4 @@
-class interface_Coffee {
+class Coffee {
     constructor(cost, description) {
         this.cost = cost;
         this.description = description;
@@ -9,13 +9,13 @@ class interface_Coffee {
     }
 
     getDescription() {
-         return this.description
+        return this.description
     }
 }
 
 
 
-class StandartCoffee extends interface_Coffee {
+class StandartCoffee extends Coffee {
     cost = 10;
 
     getCost() {
@@ -29,7 +29,7 @@ class StandartCoffee extends interface_Coffee {
 
 
 
-class MilkCoffee extends interface_Coffee {
+class MilkCoffee extends Coffee {
     constructor(coffee) {
         super();
         this.coffee = coffee
@@ -45,7 +45,7 @@ class MilkCoffee extends interface_Coffee {
 }
 
 
-class VanillaCoffee extends interface_Coffee {
+class VanillaCoffee extends Coffee {
     constructor(coffee) {
         super();
         this.coffee = coffee
@@ -62,15 +62,11 @@ class VanillaCoffee extends interface_Coffee {
 
 
 let someCoffee = new StandartCoffee()
-console.log(someCoffee.getCost())
-console.log(someCoffee.getDescription())
+console.log(`Cумма: $${someCoffee.getCost()}  - ${someCoffee.getDescription()} `)
+
 
 someCoffee = new MilkCoffee(someCoffee)
-console.log(someCoffee.getCost())
-console.log(someCoffee.getDescription())
-
+console.log(`Cумма: $${someCoffee.getCost()}  - ${someCoffee.getDescription()} `)
 
 someCoffee = new VanillaCoffee(someCoffee)
-console.log(someCoffee.getCost())
-console.log(someCoffee.getDescription())
-
+console.log(`Cумма: $${someCoffee.getCost()}  - ${someCoffee.getDescription()} `)

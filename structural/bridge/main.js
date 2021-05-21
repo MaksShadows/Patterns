@@ -1,4 +1,4 @@
-class interface_Pages {
+class Pages {
     getContent() {
         throw new Error(`В ${this.constructor.name} не описан метод getContent()`)
     }
@@ -7,7 +7,7 @@ class interface_Pages {
     }
 }
 
-class About extends interface_Pages {
+class About extends Pages {
     constructor(theme) {
         super();
         this.theme = theme

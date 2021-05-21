@@ -36,3 +36,4 @@ const geo = new GeoProxy();
 geo.getLatLng("Paris");
 geo.getLatLng("London");
 geo.getLatLng("Amsterdam");
+geo.getLatLng("Berlin");
