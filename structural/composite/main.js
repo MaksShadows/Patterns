@@ -1,3 +1,11 @@
+/*
+Компоновщик — это структурный паттерн проектирования, который позволяет сгруппировать множество объектов в древовидную структуру,
+а затем работать с ней так, как будто это единичный объект. Паттерн Компоновщик имеет смысл только тогда, когда основная модель
+вашей программы может быть структурирована в виде дерева.
+*/
+
+//Class presenting a Composite component
+
 class Composite {
     constructor(compositeName) {
         this.children = [];
@@ -17,6 +25,7 @@ class Composite {
     }
 }
 
+// Class presenting an item (Leaf) in composition
 
 class Leaf extends Composite {
     constructor(leafName, leafPrice) {

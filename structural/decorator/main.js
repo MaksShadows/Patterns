@@ -1,3 +1,14 @@
+/**
+ *
+ * ПАТТЕРН ДЕКОРАТОР (обертка)
+ * Позволяет наделить обьект новыми возможностями не меняя первоначальный класс и не создавая дочерние классы
+ * Принцип работы: декоратор помещает целевой обьект в обьект обертку, кот-й запускает базовое поведение обьекта,
+ * а затем добавляет/отнимает что-то свое.
+ *
+ */
+
+//Class presenting an Element base class
+
 class Coffee {
     constructor(cost, description) {
         this.cost = cost;
@@ -13,6 +24,8 @@ class Coffee {
     }
 }
 
+
+// Class presenting distance extend Decorator for Element base class
 
 
 class StandartCoffee extends Coffee {
