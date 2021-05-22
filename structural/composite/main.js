@@ -4,7 +4,6 @@
 вашей программы может быть структурирована в виде дерева.
 */
 
-//Class presenting a Composite component
 
 class Composite {
     constructor(compositeName) {

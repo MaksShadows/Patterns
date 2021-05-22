@@ -4,7 +4,8 @@
 
 */
 
-class Pages {
+// Основная иерархия (абстракция)
+class interface_Pages {
     getContent() {
         throw new Error(`В ${this.constructor.name} не описан метод getContent()`)
     }
@@ -13,7 +14,7 @@ class Pages {
     }
 }
 
-class About extends Pages {
+class About extends interface_Pages {
     constructor(theme) {
         super();
         this.theme = theme
@@ -41,7 +42,7 @@ class Careers extends interface_Pages {
     }
 }
 
-//  Реализация
+// Вспомогательная иерархия (реализация)
 class DarkTheme {
     getColor() {
         return 'Dark Black'
@@ -51,12 +52,6 @@ class DarkTheme {
 class LightTheme {
     getColor() {
         return 'Off white'
-    }
-}
-
-class AquaTheme {
-    getColor() {
-        return 'Light blue'
     }
 }
 
@@ -70,3 +65,5 @@ const careers = new Careers(darkTheme);
 console.log(about.getContent());
 console.log(careers.getContent());
 
+// about.setTheme(lightTheme); // динамически меняем темы
+// careers.setTheme(lightTheme);

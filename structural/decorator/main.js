@@ -41,7 +41,6 @@ class StandartCoffee extends Coffee {
 }
 
 
-
 class MilkCoffee extends Coffee {
     constructor(coffee) {
         super();
