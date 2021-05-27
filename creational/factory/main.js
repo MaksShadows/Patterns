@@ -1,41 +1,44 @@
+class MemberFactory {
+    createMember(employeeType) {
+        if (employeeType === 'FrondEnd Dedeloper') {
+            return new Developer(employeeType);
+        }
+        if (employeeType === 'Tester engineer') {
+            return new Tester(employeeType);
+        }
 
-class Developer {
-    constructor(name) {
-        this.name = name;
-        this.type = "Developer";
+        throw new Error('Такого типа не существует');
     }
 }
 
-class Tester {
-    constructor(name) {
-        this.name = name;
-        this.type = "Tester";
+class Worker {
+    constructor(type, hourly) {
+        this.type = type;
+        this.hourly = hourly;
+    }
+
+    describe() {
+        console.log(`Привет, я ${this.type} и моя ставка ${this.hourly}`);
     }
 }
 
-function MemberFactory() {
-    this.createMember = function (name, type) {
-        let member;
-        if (type === 'developer') member = new Developer(name)
-        else if (type === 'tester') member = new Tester(name)
-        return member;
+class Developer extends Worker {
+    constructor(type) {
+        const hourly = '1800$';
+        super(type, hourly);
     }
 }
 
-function say() {
-    console.log(`${this.name} - ${this.type} `)
+class Tester extends Worker {
+    constructor(type) {
+        const hourly = '1000$';
+        super(type, hourly);
+    }
 }
 
-// creating objects
 
-const members = [];
-const factory = new MemberFactory();
-
-members.push(factory.createMember("Alex Sipmson", 'developer'))
-members.push(factory.createMember("Tom Bond", 'developer'))
-members.push(factory.createMember("Marc Weldman", 'tester'))
-members.push(factory.createMember("Sammy Ranier", 'tester'))
-
-members.forEach(function (x) {
-    return say.call(x);
-});
+ const employees = [];
+ const factory = new MemberFactory();
+ employees.push(factory.createMember('FrondEnd Dedeloper'));
+ employees.push(factory.createMember('Tester engineer'));
+ employees.forEach((employee) => employee.describe());
