@@ -30,18 +30,11 @@
         </mxGraphModel>
     </diagram>
     <diagram id="4ZAdag8gtUJbRoVjFEnF" name="Page-2">
-        &#xa;
-        <mxGraphModel dx="820" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
-            &#xa;
+        <mxGraphModel dx="537" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
-                &#xa;
                 <mxCell id="bjY-fz4MgQJbJ-gEGefi-0"/>
-                &#xa;
                 <mxCell id="bjY-fz4MgQJbJ-gEGefi-1" parent="bjY-fz4MgQJbJ-gEGefi-0"/>
-                &#xa;
             </root>
-            &#xa;
         </mxGraphModel>
-        &#xa;
     </diagram>
 </mxfile>
