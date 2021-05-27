@@ -1,7 +1,5 @@
 class Book {
     constructor() {}
-
-    clone = () => {};
 }
 
 class BookPrototype extends Book {
