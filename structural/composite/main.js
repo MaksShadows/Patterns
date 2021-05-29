@@ -1,42 +1,63 @@
 class Composite {
-    constructor(compositeName) {
-        this.children = [];
-        this.compositeName = compositeName;
+    constructor(name, price) {
+        this.name = name;
+        this.price = price;
     }
 
-    add(child) {
-        this.children.push(child);
+    getName() {
+        return this.name;
     }
-
     getPrice() {
-        let price = 0;
-
-        this.children.forEach((child) => price += child.getPrice());
-
-        return price;
+        return this.price;
     }
 }
 
 // Class presenting an item (Leaf) in composition
 
-class Leaf extends Composite {
-    constructor(leafName, leafPrice) {
-        super()
-        this.leafName = leafName;
-        this.leafPrice = leafPrice;
+class Car extends Composite {
+    constructor(name) {
+        super();
+        this.name = name;
+        this.equipments = [];
+    }
+
+    getName(name) {
+        let unitsName = this.equipments
+            .map(item => item.getName(name) + "\n")
+            .join("");
+
+        return `${this.name}: {\n${unitsName}}`;
     }
 
     getPrice() {
-        return this.leafPrice;
+         let price = 0;
+
+         this.equipments.forEach((child) => price += child.getPrice());
+
+         return price;
+    }
+
+    add(equipment) {
+        this.equipments.push(equipment);
     }
 }
 
 
-const sportCar = new Composite('Спортивный автомобиль');
-const sportSuspension = new Leaf('Спортивная подвеска', 50000);
-const sportTransmission = new Leaf('Спортивная коробка передач', 100000);
+const sportCar = new Car('Спортивный автомобиль');
+const premiumCar = new Car('Премиум автомобиль');
 
-sportCar.add(sportSuspension);
-sportCar.add(sportTransmission);
+const car1 = new Composite('Audi', 2000000);
+const car2 = new Composite('BMW', 2500000);
+const car3 = new Composite('Porsche', 3500000);
+const car4 = new Composite('Lexuc', 2800000);
 
-console.log(`Общая сумма: $${sportCar.getPrice()}`);
+
+sportCar.add(car2);
+sportCar.add(car3);
+
+premiumCar.add(car1)
+premiumCar.add(car4)
+
+
+console.log(sportCar.getName("") + premiumCar.getName());
+console.log("Общая сумма: $" + sportCar.getPrice());

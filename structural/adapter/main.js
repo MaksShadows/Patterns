@@ -1,51 +1,56 @@
-class UsersLanguageAdapter {
-    constructor(lang = "en") {
-        this.language = lang;
+class OldDateConverter {
+    convertToUSAFormat(dateObject) {
+        const [y, m, d] = dateObject.toISOString().substr(0, 10).split('-');
+        return [m, d, y].join('-');
+    }
 
-        this.languageMessages = {
-            add: {
-                en: "Added succefully",
-                rus: "Добавлено успешно"
-            },
-            remove: {
-                en: "Added succefully",
-                rus: "Добавлено успешно"
-            },
+    convertToUAFormat(dateObject) {
+        const [y, m, d] = dateObject.toISOString().substr(0, 10).split('-');
+        return [d, m, y].join('-');
+    }
+}
+
+class NewDateConverter {
+    convert(dateObject, format) {
+        const [y, m, d] = dateObject.toISOString().substr(0, 10).split('-');
+
+        const parser = {
+            'mm-dd-yyyy': () => `${m}-${d}-${y}`,
+            'dd-mm-yyyy': () => `${d}-${m}-${y}`,
         };
-    }
 
-    setLanguage(lang = "en") {
-        this.language = lang;
-    }
-
-    display(method) {
-        console.log(this.languageMessages[method][this.language]);
+        return parser[format]();
     }
 }
 
-class Users {
-    constructor(lang) {
-        this.data = [];
-        this.messages = new UsersLanguageAdapter(lang);
+class DateAdapter {
+    constructor() {
+        this.dateConverter = new NewDateConverter();
     }
 
-    add(name) {
-        this.data.push(name);
-        this.messages.display("add");
-        return true;
+    convertToUSAFormat(dateObject) {
+        return this.dateConverter.convert(dateObject, 'mm-dd-yyyy');
     }
 
-    remove(name) {
-        this.data = this.data.filter(currentName => name !== currentName);
-        this.messages.display("remove");
-        return true;
+    convertToUAFormat(dateObject) {
+        return this.dateConverter.convert(dateObject, 'dd-mm-yyyy');
     }
 }
+    const oldDateConverter = new OldDateConverter();
+    const newDateConverter = new NewDateConverter();
+    const dateAdapter = new DateAdapter();
 
-  const user1 = new Users("rus");
-  user1.add("Ricardo");
+    const dateToUSAOld = oldDateConverter.convertToUSAFormat(new Date());
+    const dateToRussianOld = oldDateConverter.convertToUAFormat(new Date());
+    const dateToUSANew = newDateConverter.convert(new Date(), 'mm-dd-yyyy');
+    const dateToRussianNew = newDateConverter.convert(new Date(), 'dd-mm-yyyy');
 
-  user1.messages.setLanguage("en");
+    const dateAdapterToUSA = dateAdapter.convertToUSAFormat(new Date());
+    const dateAdapterToRussian = dateAdapter.convertToUAFormat(new Date());
 
-  user1.remove("Ricardo");
-console.log(user1.add());
+    console.log('Американский формат, старый конвертер:', dateToUSAOld);
+    console.log('Американский формат, новый конвертер:', dateToUSANew);
+    console.log('Американский формат, адаптер:', dateAdapterToUSA);
+    console.log('Украинский формат, старый конвертер:', dateToRussianOld);
+    console.log('Украинский формат, новый конвертер:', dateToRussianNew);
+    console.log('Украиснкий формат, адаптер:', dateAdapterToRussian);
