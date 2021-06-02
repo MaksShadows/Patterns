@@ -22,11 +22,11 @@ class Car extends Composite {
     }
 
     getName(name) {
-        let unitsName = this.equipments
+        let itemName = this.equipments
             .map(item => item.getName(name) + "\n")
             .join("");
 
-        return `${this.name}: {\n${unitsName}}`;
+        return `${this.name}: {\n${itemName}}`;
     }
 
     getPrice() {
