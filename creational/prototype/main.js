@@ -1,8 +1,6 @@
-
 class BookPrototype  {
 
     constructor(genre, author, name, years) {
-        super();
         this.genre = genre;
         this.author = author;
         this.name = name;
