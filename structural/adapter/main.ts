@@ -1,31 +1,38 @@
-interface MobileCharging {
-    connectWithCable(): void;
+interface IPhone {
+    useUSBTYPEC();
 }
 
-class Android {
-    insert(): void { console.log("Using micro USB...") }
+interface Android {
+    useMicroUSB();
 }
 
-
-class Iphone {
-    insert(): void { console.log("Using micro USB type c...") }
-}
-
-
-class AdapterReader implements MobileCharging {
-    mobileCabel: Android;
-
-    constructor(mobileCabel: Android) {
-        this.mobileCabel = mobileCabel;
-    }
-
-    connectWithCable() {
-        this.mobileCabel.insert();
+class iPhone11 implements IPhone {
+    useUSBTYPEC() {
+        console.log('Using micro USB type c...');
     }
 }
 
-// Используем адаптер
-const item1 = new Android();
-const mobcabel = new AdapterReader(item1);
-// считуем данные
-mobcabel.connectWithCable();
+class SamsungS20 implements Android {
+    useMicroUSB() {
+        console.log('Using micro USB...');
+    }
+}
+
+// -----
+class AdapterUSB implements Android {
+    iphoneDevice: IPhone;
+
+    constructor(iphone: IPhone) {
+        this.iphoneDevice = iphone;
+    }
+
+    useMicroUSB() {
+        console.log('Want to use micro USB, converting...');
+        this.iphoneDevice.useUSBTYPEC();
+    }
+}
+
+let iphone = new iPhone11();
+let chargeAdaptor = new AdapterUSB(iphone);
+
+chargeAdaptor.useMicroUSB();
