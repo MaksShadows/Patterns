@@ -1,41 +1,45 @@
 interface Object {
-    doAction(): void;
+    request(): void
 }
 
  class ProxyCode implements Object {
-    private realObject: RealObject;
-    private s: string;
 
-    constructor(s: string) {
-        this.s = s;
-    }
+     enormousData: number[]
+     realSubject: RealObject
 
-    public doAction(): void {
-        console.log("`doAction` of Proxy(", this.s, ")");
-        if (this.realObject === undefined) {
-            console.log("creating a new RealSubject.");
-            this.realObject = new RealObject(this.s);
-        }
-        this.realObject.doAction();
-    }
+     constructor() {
+         this.enormousData = []
+         this.realSubject = new RealObject()
+     }
+     request() {
+         if (this.enormousData.length === 0) {
+             console.log('pulling data from RealObject')
+             this.enormousData = this.realSubject.request()
+             return this.enormousData
+         }
+         console.log('pulling data from Proxy cache')
+         return this.enormousData
+     }
 }
 
  class RealObject implements Object {
-    private s: string;
+     enormousData: number[]
 
-    constructor(s: string) {
-        this.s = s;
-    }
-    public doAction(): void {
-        console.log("`doAction` of RealSubject", this.s, "is being called!");
-    }
+     constructor() {
+         this.enormousData = [1, 2, 3]
+     }
+
+     request() {
+         return this.enormousData
+     }
 }
 
-let proxy1: ProxyCode = new ProxyCode("proxy1");
+let proxy1: ProxyCode = new ProxyCode();
 
-let proxy2: ProxyCode = new ProxyCode("proxy2");
+// Use  RealObject
+console.log(proxy1.request());
+// Use Proxy cache
+console.log(proxy1.request());
 
-proxy1.doAction();
-proxy2.doAction();
 
 

@@ -3,7 +3,7 @@
 }
 
  class ConcreteFlyweight implements Flyweight {
-    private instrinsicState: String;
+    instrinsicState: String;
 
     constructor(instrinsicState: String) {
         this.instrinsicState = instrinsicState;
@@ -31,7 +31,7 @@ export class FlyweightFactory {
 }
 
 
- var factory: FlyweightFactory   = new FlyweightFactory(),
+ const factory: FlyweightFactory   = new FlyweightFactory(),
 
  conc1  = <ConcreteFlyweight>factory.getFlyweight("conc1"),
  conc2  = <ConcreteFlyweight>factory.getFlyweight("conc2");
