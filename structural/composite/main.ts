@@ -1,43 +1,43 @@
  interface Car {
-    operation(): void;
+    getOperation(): void;
 }
 
 class CompositeCAr implements Car {
 
     private list: Car[];
-    private s: String;
+    private itemCar: String;
 
-    constructor(s: String) {
+    constructor(itemCar: String) {
         this.list = [];
-        this.s = s;
+        this.itemCar = itemCar;
     }
 
-    public operation(): void {
-        console.log("Create of ", this.s)
+    public getOperation(): void {
+        console.log("Create of ", this.itemCar)
         for (var i = 0; i < this.list.length; i += 1) {
-            this.list[i].operation();
+            this.list[i].getOperation();
         }
     }
 
-    public add(c: Car): void {
-        this.list.push(c);
+    public add(carElem: Car): void {
+        this.list.push(carElem);
     }
 
-    public remove(i: number): void {
-        if (this.list.length <= i) {
+    public remove(item: number): void {
+        if (this.list.length <= item) {
             throw new Error("index out of bound!");
         }
-        this.list.splice(i, 1);
+        this.list.splice(item, 1);
     }
 }
 
  class LeafCar implements Car {
-    private s: String;
-    constructor(s: String) {
-        this.s = s;
+     private itemCar: String;
+     constructor(itemCar: String) {
+         this.itemCar= itemCar;
     }
-    public operation(): void {
-        console.log("create of LeafCar", this.s, " is called.");
+    public getOperation(): void {
+        console.log("create of LeafCar", this.itemCar, " is called.");
     }
 }
 
@@ -60,5 +60,5 @@ composite1.remove(2);
 composite2.add(leaf4);
 composite2.add(leaf5);
 
-composite1.operation();
-composite2.operation();
+composite1.getOperation();
+composite2.getOperation();

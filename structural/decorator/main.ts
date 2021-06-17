@@ -5,7 +5,7 @@ abstract class Coffee {
         return this.description;
     };
 
-    public abstract cost(): number;
+    public abstract getCost(): number;
 }
 
 abstract class CoffeeDecorator extends Coffee {
@@ -17,7 +17,7 @@ abstract class CoffeeDecorator extends Coffee {
 class Espresso extends Coffee {
     public description = "Espresso";
 
-    public cost(): number {
+    public getCost(): number {
         return 1.99;
     }
 }
@@ -25,7 +25,7 @@ class Espresso extends Coffee {
 class Americano extends Coffee {
     public description = "Americano";
 
-    public cost(): number {
+    public getCost(): number {
         return 2.99
     }
 }
@@ -41,8 +41,8 @@ class Sugar extends CoffeeDecorator {
         return this.decoratedCoffee.getDescription() + ', Sugar';
     }
 
-    public cost(): number {
-        return this.decoratedCoffee.cost() + 0.20;
+    public getCost(): number {
+        return this.decoratedCoffee.getCost() + 0.20;
     }
 }
 
@@ -56,8 +56,8 @@ class Milk extends CoffeeDecorator {
         return this.decoratedCoffee.getDescription() + ', Milk';
     }
 
-    public cost(): number {
-        return this.decoratedCoffee.cost() + 0.20;
+    public getCost(): number {
+        return this.decoratedCoffee.getCost() + 0.20;
     }
 }
 
@@ -66,5 +66,5 @@ let coffee = new Espresso();
 coffee = new Sugar(coffee);
 coffee = new Milk(coffee);
 
-console.log(coffee.cost());
+console.log(coffee.getCost());
 console.log(coffee.getDescription());

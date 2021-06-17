@@ -1,11 +1,11 @@
 // Implementor class
 interface Theme
 {
-    background(): string;
-    foreground(): string;
-    lineColor(): string;
-    fontColor(): string;
-    altFontColor(): string;
+  getbackground(): string;
+  getforeground(): string;
+  getlineColor(): string;
+  getfontColor(): string;
+  getaltFontColor(): string;
 }
 
 // Abstraction class: UI Object:
@@ -25,21 +25,21 @@ abstract class UIObject
 // Theme 1: Light Mode:
 class LightMode implements Theme
 {
-    background(): string { return "#ffffff"; }
-    foreground(): string { return "#aaaaaa"; }
-    lineColor(): string { return "#0c60cd"; }
-    fontColor(): string { return "#222222"; }
-    altFontColor(): string { return "#000000"; }
+   getbackground(): string { return "#ffffff"; }
+   getforeground(): string { return "#aaaaaa"; }
+   getlineColor(): string { return "#0c60cd"; }
+   getfontColor(): string { return "#222222"; }
+   getaltFontColor(): string { return "#000000"; }
 }
 
 // Theme 2: Dark Mode:
 class DarkMode implements Theme
 {
-    background(): string { return "#111111"; }
-    foreground(): string { return "#2d2d2d"; }
-    lineColor(): string { return "#0c60cd"; }
-    fontColor(): string { return "#dfdfdf"; }
-    altFontColor(): string { return "#efefef"; }
+    getbackground(): string { return "#111111"; }
+    getforeground(): string { return "#2d2d2d"; }
+    getlineColor(): string { return "#0c60cd"; }
+    getfontColor(): string { return "#dfdfdf"; }
+    getaltFontColor(): string { return "#efefef"; }
 }
 
 // UI Object 1: a Button:
@@ -53,9 +53,9 @@ class UIButton extends UIObject
     public draw()
     {
         console.log("Drawing a button on the screen.");
-        console.log("\tText Color: " + this.theme.fontColor());
-        console.log("\tButton Color: " + this.theme.background());
-        console.log("\tHighlight Text Color: " + this.theme.altFontColor());
+        console.log("\tText Color: " + this.theme.getfontColor());
+        console.log("\tButton Color: " + this.theme.getbackground());
+        console.log("\tHighlight Text Color: " + this.theme.getaltFontColor());
     }
 
 }
@@ -71,10 +71,10 @@ class UIGraph extends UIObject
     public draw()
     {
         console.log("Drawing a graph on the screen.");
-        console.log("\tMain Text Color: " + this.theme.fontColor());
-        console.log("\tLine Color: " + this.theme.lineColor());
-        console.log("\tAxis Text Color: " + this.theme.altFontColor());
-        console.log("\tGraph Background Color: " + this.theme.foreground());
+        console.log("\tMain Text Color: " + this.theme.getfontColor());
+        console.log("\tLine Color: " + this.theme.getlineColor());
+        console.log("\tAxis Text Color: " + this.theme.getaltFontColor());
+        console.log("\tGraph Background Color: " + this.theme.getforeground());
     }
 }
 
