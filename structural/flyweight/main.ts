@@ -1,5 +1,5 @@
  interface Flyweight {
-    operation(s: String): void;
+    getUse(stringItem: String): void;
 }
 
  class ConcreteFlyweight implements Flyweight {
@@ -9,15 +9,15 @@
         this.instrinsicState = instrinsicState;
     }
 
-    public operation(s: String): void {
-        console.log("create of ConcreteFlyweight", s, " is being called!");
+     public getUse(stringItem: String): void {
+        console.log("create of ConcreteFlyweight", stringItem, " is being called!");
     }
 }
 
 
 export class FlyweightFactory {
 
-    private fliesMap: { [s: string]: Flyweight; } = <any>{};
+    private fliesMap: { [stringItem: string]: Flyweight; } = <any>{};
 
     constructor() { }
 
@@ -36,5 +36,5 @@ export class FlyweightFactory {
  conc1  = <ConcreteFlyweight>factory.getFlyweight("conc1"),
  conc2  = <ConcreteFlyweight>factory.getFlyweight("conc2");
 
- conc1.operation("1");
- conc2.operation("2");
+ conc1.getUse("1");
+ conc2.getUse("2");

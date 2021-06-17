@@ -1,51 +1,96 @@
-// The Facade pattern
+class Computer  {
 
-class ClassA {
-    method1(): string {
-        return 'A'
-    }
-}
-
-class ClassB {
-    method2(value: string): string {
-        return value
-    }
-}
-
-class ClassC {
-    method3(value: { C: number[] }): { C: number[] } {
-        return value
-    }
-}
-
-
-class Facade {
-
-    itemClassA(): string {
-        return new ClassA().method1()
+    turnOnPC(): void {
+        console.log('The PC turned on')
     }
 
-    itemClassB(value: string): string {
-        return new ClassB().method2(value)
+    showLoadingScreen(): void {
+        console.log('Loading..')
     }
 
-    itemClassC(value: { C: number[] }): { C: number[] } {
-        return new ClassC().method3(value)
+    ram(): void {
+        console.log('Ready to be used!')
     }
+
+    cpu(): void {
+        console.log('Ready to be used!')
+    }
+
+    gpu(): void {
+        console.log('Ready to be used!')
+    }
+
+    turnOffPC(): void {
+        console.log('The PC turned off');
+    }
+
 }
 
 
-// using
-const facade = new Facade()
-console.log(facade.itemClassA());
-console.log(facade.itemClassB('B'));
-console.log(facade.itemClassC({ C: [1, 2, 3] }));
+class Mouse {
+    turnOnMouse(): void {
+        console.log('Mouse connect..');
+    }
 
-console.log(new ClassA().method1());
-console.log(new ClassB().method2('B'));
-console.log(new ClassC().method3({ C: [1, 2, 3] }));
+    turnOffMouse(): void {
+        console.log('Mouse disable..');
+    }
+}
 
+class Keyboard  {
+    turnOnKeyboard(): void {
+        console.log('Keyboard connect..');
+    }
 
+    turnOffKeyboard(): void {
+        console.log('Keyboard disable..');
+    }
 
+}
 
+// ----
+class ComputerFacade {
+    private pc:  Computer ;
+    private mouse: Mouse;
+    private keyboard: Keyboard;
 
+    constructor(pc: Computer,  mouse: Mouse, keyboard: Keyboard) {
+        this.pc = pc;
+        this.mouse = mouse;
+        this.keyboard = keyboard;
+    }
+
+    public turnOn() {
+
+        this.pc.turnOnPC();
+        this.pc.showLoadingScreen();
+        this.pc.ram();
+        this.pc.cpu();
+        this.pc.gpu();
+
+        this.keyboard.turnOnKeyboard();
+
+        this.mouse.turnOnMouse();
+    }
+
+    public turnOff() {
+
+        console.log('Computer shutdown started');
+
+        this.pc.turnOffPC();
+
+        this.keyboard.turnOffKeyboard();
+
+        this.mouse.turnOffMouse();
+    }
+
+}
+
+// Useing
+let pc = new Computer();
+let mouse = new Mouse();
+let keyboard = new Keyboard();
+
+let computer = new ComputerFacade(pc, mouse, keyboard);
+computer.turnOn();
+computer.turnOff();
