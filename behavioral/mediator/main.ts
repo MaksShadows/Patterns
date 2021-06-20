@@ -1,3 +1,5 @@
+ // The Mediator Pattern
+
  interface Mediator {
     send(msg: string, colleague: Colleague): void;
 }

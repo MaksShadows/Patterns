@@ -54,7 +54,7 @@ class Command1 implements Command {
 }
 
 class Command2 implements Command {
-   
+
     private  receiver: Receiver
 
     constructor(receiver: Receiver) {
@@ -66,7 +66,7 @@ class Command2 implements Command {
     }
 }
 
-// The Client
+
 // Create a receiver
 const RECEIVER = new Receiver()
 
