@@ -1,22 +1,22 @@
 interface WorkoutStrategy {
-    fire(): void;
+    run(): void;
     stop?(): void;
 }
 
 class Running implements WorkoutStrategy {
-    public fire(): void {
+    public run(): void {
         console.log('Running')
     }
 }
 
 class Basketball implements WorkoutStrategy {
-    public fire(): void {
+    public run(): void {
         console.log('Basketball')
     }
 }
 
 class Swimming implements WorkoutStrategy {
-    public fire(): void {
+    public run(): void {
         console.log('Swimming')
     }
 }
@@ -31,7 +31,7 @@ class Person {
 
     workout(): void {
         console.log(`${this.name} starts:`)
-        this.strategy.fire();
+        this.strategy.run();
     };
 }
 
