@@ -27,7 +27,7 @@ class FlyweightFactory {
     }
 }
 
-class AppContext {
+class ConcreteFlyweight {
 
     private codes: number[] = []
 
@@ -51,7 +51,7 @@ class AppContext {
 }
 
 // The Client
-const APP_CONTEXT = new AppContext('abracadabra')
+const APP_CONTEXT = new ConcreteFlyweight('abracadabra')
 
 // use flyweights in a context
 console.log(APP_CONTEXT.output())
