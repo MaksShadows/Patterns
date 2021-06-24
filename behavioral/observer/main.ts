@@ -1,80 +1,80 @@
 // The Obsever Pattern
 
-interface Subject {
-    registerObserver(obj: Observer);
-    removeObserver(obj: Observer);
-    notifyObservers();
-}
-
-interface Observer {
-    update(temperature: number);
-}
-
-
-class WeatherStation implements Subject {
+ class Subject {
     private observers: Observer[] = [];
-    private temperature: number;
 
-    registerObserver(obj: Observer) {
-        this.observers.push(obj);
+    public register(observer: Observer): void {
+        console.log(observer, "is pushed!");
+        this.observers.push(observer);
     }
 
-    removeObserver(obj: Observer) {
-        let index = this.observers.indexOf(obj);
-        this.observers.splice(index, 1);
+    public unregister(observer: Observer): void {
+        var n: number = this.observers.indexOf(observer);
+        console.log(observer, "is removed");
+        this.observers.splice(n, 1);
     }
 
-    notifyObservers() {
-        for (let observer of this.observers) {
-            observer.update(this.temperature);
-        }
-    }
+    public notify(): void {
+        console.log("notify all the observers", this.observers);
+        var i: number
+            , max: number;
 
-    setTemperature(temp: number) {
-        console.log('WeatherStation: new temperature measurement: ' + temp);
-        this.temperature = temp;
-        this.notifyObservers();
-    }
-}
-
-
-class TemperatureDisplay implements Observer {
-    private subject: Subject;
-
-    constructor(weatherStation: Subject) {
-        this.subject = weatherStation;
-        weatherStation.registerObserver(this);
-    }
-
-    update(temperature: number) {
-        console.log('TemperatureDisplay: I need to update my display');
-    }
-}
-
-class Fan implements Observer {
-    private subject: Subject;
-
-    constructor(weatherStation: Subject) {
-        this.subject = weatherStation;
-        weatherStation.registerObserver(this);
-    }
-
-    update(temperature: number) {
-        if (temperature > 25) {
-            console.log('Fan: Its hot here, turning myself on...');
-        } else {
-            console.log('Fan: Its nice and cool, turning myself off...');
+        for (i = 0, max = this.observers.length; i < max; i += 1) {
+            this.observers[i].notify();
         }
     }
 }
 
-let weatherStation = new WeatherStation();
+ class ConcreteSubject extends Subject {
+    private subjectState: number;
 
-let tempDisplay = new TemperatureDisplay(weatherStation);
-let fan = new Fan(weatherStation);
+    get SubjectState(): number {
+        return this.subjectState;
+    }
 
-weatherStation.setTemperature(20);
-weatherStation.setTemperature(30);
+    set SubjectState(subjectState: number) {
+        this.subjectState = subjectState;
+    }
+}
+
+ class Observer {
+    public notify(): void {  }
+}
+
+ class ConcreteObserver extends Observer {
+    private name: string;
+    private state: number;
+    private subject: ConcreteSubject;
+
+    constructor(subject: ConcreteSubject, name: string) {
+        super();
+        console.log("ConcreteObserver", name, "is created!");
+        this.subject = subject;
+        this.name = name;
+    }
+
+    public notify(): void {
+        console.log("ConcreteObserver's notify method");
+        this.state = this.subject.SubjectState;
+        console.log(this.name, this.state);
+    }
+
+    get Subject(): ConcreteSubject {
+        return this.subject;
+    }
+
+    set Subject(subject: ConcreteSubject) {
+        this.subject = subject;
+    }
+}
 
 
-;
+
+const sub: ConcreteSubject = new ConcreteSubject();
+
+sub.register(new ConcreteObserver(sub, "user1"));
+sub.register(new ConcreteObserver(sub, "user2"));
+sub.register(new ConcreteObserver(sub, "user3"));
+
+sub.SubjectState = 125;
+sub.notify();
