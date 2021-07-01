@@ -1,21 +1,21 @@
-export interface Iterator {
-    next(): any;
+export interface Iterator<T> {
+    next(): T;
     hasNext(): boolean;
 }
 
  interface Aggregator {
-    createIterator(): Iterator;
+     createIterator(): Iterator<Number>;
 }
 
-class ConcreteIterator implements Iterator {
-    private collection: any[] = [];
+class ConcreteIterator implements Iterator<Number> {
+    private collection: Number[];
     private position: number = 0;
 
-    constructor(collection: any[]) {
+    constructor(collection: Number[]) {
         this.collection = collection;
     }
 
-    public next(): any {
+    public next(): Number {
 
         const result = this.collection[this.position];
         this.position += 1;
@@ -33,7 +33,7 @@ class Numbers implements Aggregator {
     constructor(collection: number[]) {
         this.collection = collection;
     }
-    public createIterator(): Iterator {
+    public createIterator(): Iterator<Number> {
         return new ConcreteIterator(this.collection);
     }
 }
