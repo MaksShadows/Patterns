@@ -12,10 +12,6 @@ class Memento {
 class Originator {
     private field: string;
 
-    constructor() {
-        this.field = '';
-    }
-
     public get state(): string {
         return this.field
     }
