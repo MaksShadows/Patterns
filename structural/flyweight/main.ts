@@ -1,8 +1,8 @@
-interface Flyweight {
+interface IFlyweight {
     code: number
 }
 
-class Flyweight implements Flyweight {
+class Flyweight implements IFlyweight  {
     // The Concrete Flyweight
     code: number
     constructor(code: number) {
@@ -12,6 +12,14 @@ class Flyweight implements Flyweight {
 
 class FlyweightFactory {
     // Creating the FlyweightFactory as a static class
+
+    private codes: number[] = []
+
+    constructor(codes: string) {
+        for (let i = 0; i < codes.length; i++) {
+            this.codes.push(codes.charCodeAt(i))
+        }
+    }
 
     static flyweights: { [id: number]: Flyweight } = {}
 
@@ -25,20 +33,9 @@ class FlyweightFactory {
     static getCount(): number {
         return Object.keys(FlyweightFactory.flyweights).length
     }
-}
 
-class ConcreteFlyweight {
+    public output() {
 
-    private codes: number[] = []
-
-    constructor(codes: string) {
-        for (let i = 0; i < codes.length; i++) {
-            this.codes.push(codes.charCodeAt(i))
-        }
-    }
-
-    output() {
-        // The context specific output that uses flyweights
         let ret = ''
         this.codes.forEach((c) => {
             ret =
@@ -51,7 +48,7 @@ class ConcreteFlyweight {
 }
 
 // The Client
-const APP_CONTEXT = new ConcreteFlyweight('abracadabra')
+const APP_CONTEXT = new FlyweightFactory('abracadabra')
 
 // use flyweights in a context
 console.log(APP_CONTEXT.output())
