@@ -9,18 +9,18 @@
     }
 
     public unregister(observer: Observer): void {
-        var n: number = this.observers.indexOf(observer);
+        let numitem: number = this.observers.indexOf(observer);
         console.log(observer, "is removed");
-        this.observers.splice(n, 1);
+        this.observers.splice(numitem, 1);
     }
 
     public notify(): void {
         console.log("notify all the observers", this.observers);
-        var i: number
+        let index: number
             , max: number;
 
-        for (i = 0, max = this.observers.length; i < max; i += 1) {
-            this.observers[i].notify();
+        for (index = 0, max = this.observers.length; index < max; index += 1) {
+            this.observers[index].notify();
         }
     }
 }
