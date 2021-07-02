@@ -1,86 +1,71 @@
 // The Command Pattern Concept
 
 interface Command {
-    getexecute(): void
+    getexecute(): void;
 }
 
-class Invoker {
 
-    private commands: { [id: string]: Command }
+class Receive {
+    action(): void {
+        console.log('Receiver takes action');
+    }
+}
+
+class LaunchCommand implements Command {
+    private receiver: Receive;
+
+    constructor(receiver: Receive) {
+        this.receiver = receiver;
+    }
+
+    getexecute(): void {
+        console.log('Launch!!!');
+        this.receiver.action();
+    }
+}
+
+class StopCommand implements Command {
+    private receiver: Receive;
+
+    constructor(receiver: Receive) {
+        this.receiver = receiver;
+    }
+
+    getexecute(): void {
+        console.log('Stop!!!');
+        this.receiver.action();
+    }
+}
+
+class  Invoker {
+    private commands: Command[];
 
     constructor() {
-        this.commands = {}
+        this.commands = [];
     }
 
-    register(commandName: string, command: Command) {
-
-        this.commands[commandName] = command
+    addCommand(command: Command) {
+        this.commands.push(command);
     }
 
-    getexecute(commandName: string) {
-
-        if (commandName in this.commands) {
-            this.commands[commandName].getexecute()
-        } else {
-            console.log(`Command [${commandName}] not recognised`)
+    runCommand(command?: Command) {
+        if (command) {
+            this.commands.push(command);
         }
+        const commandOnFire = this.commands.shift();
+        commandOnFire.getexecute();
     }
 }
 
-class Receiver {
+let receiver = new Receive();
 
-    runCommand1() {
+let launch = new LaunchCommand(receiver);
+let stopCommand = new StopCommand(receiver);
 
-        console.log('Executing Command 1')
-    }
+let invoker = new Invoker();
 
-    runCommand2() {
+invoker.addCommand(launch);
+invoker.runCommand();
 
-        console.log('Executing Command 2')
-    }
-}
-
-class Command1 implements Command {
-
-    private  receiver: Receiver
-
-    constructor(receiver: Receiver) {
-        this.receiver = receiver
-    }
-
-    getexecute() {
-        this.receiver.runCommand1()
-    }
-}
-
-class Command2 implements Command {
-
-    private  receiver: Receiver
-
-    constructor(receiver: Receiver) {
-        this.receiver = receiver
-    }
-
-    getexecute() {
-        this.receiver.runCommand2()
-    }
-}
-
-
-// Create a receiver
-const RECEIVER = new Receiver()
-
-// Create Commands
-const COMMAND1 = new Command1(RECEIVER)
-const COMMAND2 = new Command2(RECEIVER)
-
-// Register the commands with the invoker
-const INVOKER = new Invoker()
-INVOKER.register('1', COMMAND1)
-INVOKER.register('2', COMMAND2)
-
-// Execute the commands that are registered on the Invoker
-INVOKER.getexecute('1')
-INVOKER.getexecute('2')
-INVOKER.getexecute('1')
-INVOKER.getexecute('2')
+invoker.addCommand(stopCommand);
+invoker.runCommand();
